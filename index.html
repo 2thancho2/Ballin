@@ -734,94 +734,28 @@
 
 const SPECIAL_BALLS = [
     {
-        id: "fire",
-        name: "화염 볼",
-        color: "#ff4d4d",
-        image: "https://api.iconify.design/noto:fire.svg",
-        soundUrl: "https://assets.mixkit.co/active_storage/sfx/2870/2870-preview.mp3", // GitHub Raw MP3 URL 적용 위치
-        maxHp: 400,
-        attackPower: 35,
+        id: "takethatlshit",
+        name: "권루트",
+        color: "#2db400",
+        image: "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-19/782386344_18082780595417872_9181844508404369934_n.jpg?_nc_cat=104&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy44NTkuQzMifQ%3D%3D&_nc_ohc=fXaTqkY3hsgQ7kNvwGZvWVY&_nc_oc=AdoXudsLQpQMaxRF8pIG6j2ngAnqdCvFFaedHDqwC_Hh9yOTu6juX_aZgfUIX_d-HCE&_nc_zt=24&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=KOS2NplhQz2HZZ1iHV2qdg&_nc_ss=7b6a8&oh=00_AQJrZRbtrxkeHK2auF5L-mPsxgCLv47Dto86bWrG-SUHtQ&oe=6AABE478",
+        soundUrl: "https://github.com/2thancho2/2than-MP3/raw/50888708f55b487d8b46768d60a01b38afab0a5a/Takel.mp3", // GitHub Raw MP3 URL 적용 위치
+        maxHp: 250,
+        attackPower: 40,
         cooldown: 5.0,
         speed: 3.8,
-        description: "스킬 사용 시 상대방의 위치에 **강력한 화염 폭발**이 발생합니다. 넓은 영역의 폭발 이펙트와 함께 큰 피해를 즉시 가합니다.",
+        description: "스킬 사용 시 현제 위치 근처에서 폭발 이 일어남",
         onSkillUse: (caster, target, addEffect) => {
             addEffect({
                 type: "explosion",
-                x: target.x,
-                y: target.y,
-                color: "rgba(255, 77, 77, 0.6)",
-                radius: 10,
-                maxRadius: 100,
+                x: caster.x,
+                y: caster.y,
+                color: "rgba(45, 180, 0,0.5)",
+                radius: 200,
+                maxRadius: 200,
                 duration: 30
             });
         }
     },
-    {
-        id: "thunder",
-        name: "번개 볼",
-        color: "#ffcc00",
-        image: "https://api.iconify.design/noto:high-voltage.svg",
-        soundUrl: "https://assets.mixkit.co/active_storage/sfx/2740/2740-preview.mp3", // GitHub Raw MP3 URL 적용 위치
-        maxHp: 350,
-        attackPower: 45,
-        cooldown: 4.0,
-        speed: 4.5,
-        description: "자신의 공 위치에서 상대방의 위치로 **순식간에 직격하는 벼락**을 내리칩니다. 쿨타임이 짧고 강력한 단일 타격 공격입니다.",
-        onSkillUse: (caster, target, addEffect) => {
-            addEffect({
-                type: "lightning",
-                x1: caster.x, y1: caster.y,
-                x2: target.x, y2: target.y,
-                color: "#ffea00",
-                duration: 20
-            });
-        }
-    },
-    {
-        id: "laser",
-        name: "플라즈마 볼",
-        color: "#a855f7",
-        image: "https://api.iconify.design/noto:atom-symbol.svg",
-        soundUrl: "https://assets.mixkit.co/active_storage/sfx/2578/2578-preview.mp3", // GitHub Raw MP3 URL 적용 위치
-        maxHp: 450,
-        attackPower: 30,
-        cooldown: 6.0,
-        speed: 3.5,
-        description: "상대 방향을 향해 **두꺼운 고에너지 플라즈마 레이저 빔**을 발사합니다. 지속 공격 판정과 묵직한 타격감을 줍니다.",
-        onSkillUse: (caster, target, addEffect) => {
-            addEffect({
-                type: "beam",
-                x1: caster.x, y1: caster.y,
-                x2: target.x, y2: target.y,
-                color: "rgba(168, 85, 247, 0.8)",
-                width: 30,
-                duration: 25
-            });
-        }
-    },
-    {
-        id: "ice",
-        name: "얼음 볼",
-        color: "#38bdf8",
-        image: "https://api.iconify.design/noto:snowflake.svg",
-        soundUrl: "https://assets.mixkit.co/active_storage/sfx/2042/2042-preview.mp3", // GitHub Raw MP3 URL 적용 위치
-        maxHp: 500,
-        attackPower: 25,
-        cooldown: 4.5,
-        speed: 3.2,
-        description: "자신의 공을 중심으로 **원형의 냉기 충격파**를 사방으로 빠르게 퍼트립니다. 넓은 방어/공격 범위를 가집니다.",
-        onSkillUse: (caster, target, addEffect) => {
-            addEffect({
-                type: "wave",
-                x: caster.x,
-                y: caster.y,
-                color: "#38bdf8",
-                radius: 10,
-                maxRadius: 160,
-                duration: 35
-            });
-        }
-    }
 ];
 
 // 이미지 사전 로딩
