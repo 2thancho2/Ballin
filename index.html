@@ -681,7 +681,10 @@
                 color: "rgba(255, 77, 77, 0.6)",
                 radius: 10,
                 maxRadius: 100,
-                duration: 30
+                duration: 30,
+                caster: caster,
+                target: target,
+                hasHit: false
             
     2. Lightning
     출발점에서 도착점까지 중간 지점이 지그재그로 꺾이는 벼락/전기 효과입니다.
@@ -727,7 +730,11 @@
                 color: "#38bdf8",
                 radius: 10,
                 maxRadius: 160,
-                duration: 35
+                duration: 35,
+                damage: caster.attackPower,
+                caster: caster,
+                target: target,
+                hasHit: false
     
                 
     */
@@ -740,7 +747,7 @@ const SPECIAL_BALLS = [
         image: "https://scontent-icn2-1.cdninstagram.com/v/t51.82787-19/782386344_18082780595417872_9181844508404369934_n.jpg?_nc_cat=104&ccb=7-5&_nc_sid=bf7eb4&efg=eyJ2ZW5jb2RlX3RhZyI6InByb2ZpbGVfcGljLnd3dy44NTkuQzMifQ%3D%3D&_nc_ohc=fXaTqkY3hsgQ7kNvwGZvWVY&_nc_oc=AdoXudsLQpQMaxRF8pIG6j2ngAnqdCvFFaedHDqwC_Hh9yOTu6juX_aZgfUIX_d-HCE&_nc_zt=24&_nc_ht=scontent-icn2-1.cdninstagram.com&_nc_gid=KOS2NplhQz2HZZ1iHV2qdg&_nc_ss=7b6a8&oh=00_AQJrZRbtrxkeHK2auF5L-mPsxgCLv47Dto86bWrG-SUHtQ&oe=6AABE478",
         soundUrl: "https://github.com/2thancho2/2than-MP3/raw/50888708f55b487d8b46768d60a01b38afab0a5a/Takel.mp3", // GitHub Raw MP3 URL 적용 위치
         maxHp: 250,
-        attackPower: 40,
+        attackPower: 76,
         cooldown: 5.0,
         speed: 3.8,
         description: "스킬 사용 시 현제 위치 근처에서 폭발 이 일어남",
@@ -749,10 +756,130 @@ const SPECIAL_BALLS = [
                 type: "explosion",
                 x: caster.x,
                 y: caster.y,
-                color: "rgba(45, 180, 0,0.5)",
+                color: "rgba(45, 180, 0, 0.5)",
                 radius: 200,
                 maxRadius: 200,
-                duration: 30
+                duration: 30,
+                caster: caster,
+                target: target,
+                hasHit: false
+            });
+        }
+    },
+    {
+        id: "lilliltachi",
+        name: "릴릴타치",
+        color: "#5DADEC",
+        image: "https://i.namu.wiki/i/eJ91jOwGqeP8IBkTDRaKmxJiMimEOYc_Cnsx4fODSI3Q9MOCPS9pZrwf7vIn1JllAUVq9Gi6fVKCVZrgvZzzZbpwCUK3BQMZ4l-xCMhiCDWyarjN6PDvI68oBcO0P8RLAmFw6qLYtErR6BKvkq9yoA.webp",
+        soundUrl: "https://github.com/2thancho2/2than-MP3/raw/refs/heads/main/lilliltachi.mp3",
+        maxHp: 300,
+        attackPower: 45,
+        cooldown: 8.0,
+        speed: 4.0,
+        description: "스킬 사용 시 상대방에게 크로우펀치가 날라감",
+        onSkillUse: (caster, target, addEffect) => {
+            addEffect({
+                type: "lightning",
+                x1: caster.x, y1: caster.y,
+                x2: target.x, y2: target.y,
+                color: "#5DADEC",
+                duration: 40
+            });
+        }
+    },
+    {
+        id: "bigstoneboi",
+        name: "빅스톤보이",
+        color: "#FEB309",
+        image: "https://i.namu.wiki/i/HEPHzKcz7jcymqClR1zgWZmCp31k5AKs_t-S6E8fcWEdTALVVrQLWcGhACuYC9wMb7A49MhmCouHZCotL4yCTlK9thzmOTRV6zWzFP8Vjo4ur4WrSMstPjgbbs8Uz6T8MRf_QNJLvw5ViX9ZaTtFuA.webp",
+        soundUrl: "https://github.com/2thancho2/2than-MP3/raw/refs/heads/main/bigstoneboi.mp3",
+        maxHp: 300,
+        attackPower: 96,
+        cooldown: 6.0,
+        speed: 2.5,
+        description: "스킬 사용 시 상대방에게 플라잉 엘보 드롭이 날라감",
+        onSkillUse: (caster, target, addEffect) => {
+            addEffect({
+                type: "explosion",
+                x: caster.x,
+                y: caster.y,
+                color: "rgba(254, 179, 9, 0.8)",
+                radius: 100,
+                maxRadius: 150,
+                duration: 30,
+                caster: caster,
+                target: target,
+                hasHit: false
+            });
+        }
+    },
+    {
+        id: "hyunseolee",
+        name: "이현서",
+        color: "#000000",
+        image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQlIzL8DS5lxYd1nerUmIjs5hndNjQuQdT4Kt_KbxWrdPHijAXOEt4z-6pF&s=10",
+        soundUrl: "https://github.com/2thancho2/2than-MP3/raw/refs/heads/main/%E1%84%8B%E1%85%B5%E1%84%92%E1%85%A7%E1%86%AB%E1%84%89%E1%85%A5.mp3",
+        maxHp: 270,
+        attackPower: 50,
+        cooldown: 6.0,
+        speed: 2.7,
+        description: "스킬 사용 시 상대방에게 불도저가 날라감",
+        onSkillUse: (caster, target, addEffect) => {
+            addEffect({
+                type: "wave",
+                x: caster.x,
+                y: caster.y,
+                color: "rgba(0,0,0,0.8)",
+                radius: 10,
+                maxRadius: 160,
+                duration: 35,
+                damage: caster.attackPower,
+                caster: caster,
+                target: target,
+                hasHit: false
+            });
+        }
+    },
+    {
+        id: "lildaehoon",
+        name: "릴대훈",
+        color: "#f294ef",
+        image: "https://i.namu.wiki/i/H3fkkAFPC_cWTz3SoNjE4VAuPmKyW6p46rl3PBuOOtdfw04TOSAxNaI2jopRix6IKgdR8UEF1Kh9Wv_gohO_hNAAoMGHDWxrnUtT4YcBli66US9qJkPYeLiUCtxLiJr4uNHKs_SdlNaN32Fbj3XrXw.webp",
+        soundUrl: "https://github.com/2thancho2/2than-MP3/raw/refs/heads/main/lildaehoon.mp3",
+        maxHp: 280,
+        attackPower: 55,
+        cooldown: 8.5,
+        speed: 3.7,
+        description: "스킬 사용 시 상대방에게 낡은 대포가 날라감",
+        onSkillUse: (caster, target, addEffect) => {
+            addEffect({
+                type: "beam",
+                x1: caster.x, y1: caster.y,
+                x2: target.x, y2: target.y,
+                color: "rgba(242, 148, 239, 0.8)",
+                width: 30,
+                duration: 25
+            });
+        }
+    },
+    {
+        id: "sixmini",
+        name: "육승민",
+        color: "#5f78f5",
+        image: "https://yt3.googleusercontent.com/V2grwypqxzMD2zH8-1U3airpBrXC5jZe29ipwzSDYroaO3lqYSlmnqycp0647EWJ6fUIOpV0Jw=s900-c-k-c0x00ffffff-no-rj",
+        soundUrl: "https://github.com/2thancho2/2than-MP3/raw/refs/heads/main/sixmini_vocal_%5Bcut_2sec%5D.mp3",
+        maxHp: 300,
+        attackPower: 20,
+        cooldown: 3.7,
+        speed: 4.0,
+        description: "스킬 사용 시 **번개**가 날라감",
+        onSkillUse: (caster, target, addEffect) => {
+            addEffect({
+                type: "lightning",
+                x1: caster.x, y1: caster.y,
+                x2: target.x, y2: target.y,
+                color: "#5f78f5",
+                duration: 20
             });
         }
     },
@@ -1040,21 +1167,25 @@ function usePlayerSkill() {
     updateStatusUI();
 }
 
-// 🔊 스킬 발동 시 사운드 재생
 function triggerSkill(caster, target) {
     caster.coolTimer = 0;
-    target.currentHp = Math.max(0, target.currentHp - caster.attackPower);
-    addDamageText(target.x, target.y - 30, `-${caster.attackPower}`, caster.color);
 
-    // soundUrl이 지정되어 있으면 MP3 오디오 재생
+    // 🔊 사운드 재생
     if (caster.soundUrl) {
         const audio = new Audio(caster.soundUrl);
-        audio.volume = 0.5; // 소리 크기 설정 (0.0 ~ 1.0)
-        audio.play().catch(e => console.log("사운드 재생 오류:", e));
+        audio.volume = 0.5;
+        audio.play().catch(e => console.log("사운드 에러:", e));
     }
 
+    // 스킬 이펙트 생성 및 전달
     if (caster.onSkillUse) {
         caster.onSkillUse(caster, target, (effect) => {
+            // 필수 타격 판정 데이터 주입
+            effect.caster = caster;
+            effect.target = target;
+            effect.damage = caster.attackPower;
+            effect.hasHit = false;
+            
             visualEffects.push(effect);
         });
     }
@@ -1107,40 +1238,66 @@ function render() {
         });
     });
 
-    for (let i = visualEffects.length - 1; i >= 0; i--) {
-        const fx = visualEffects[i];
-        ctx.save();
+    // --- render() 함수 내부의 visualEffects 루프 부분 ---
+for (let i = visualEffects.length - 1; i >= 0; i--) {
+    const fx = visualEffects[i];
+    ctx.save();
+
+    // 🎯 1. 아직 안 맞았고, 데미지 정보가 있는 이펙트의 타격 판정
+    if (!fx.hasHit && fx.damage && fx.target) {
+        let isHit = false;
 
         if (fx.type === "explosion" || fx.type === "wave") {
-            ctx.beginPath();
-            ctx.arc(fx.x, fx.y, fx.radius, 0, Math.PI * 2);
-            ctx.fillStyle = fx.color;
-            ctx.fill();
-            fx.radius += (fx.maxRadius - fx.radius) * 0.15;
-        } else if (fx.type === "lightning") {
-            ctx.beginPath();
-            ctx.moveTo(fx.x1, fx.y1);
-            const midX = (fx.x1 + fx.x2) / 2 + (Math.random() - 0.5) * 40;
-            const midY = (fx.y1 + fx.y2) / 2 + (Math.random() - 0.5) * 40;
-            ctx.lineTo(midX, midY);
-            ctx.lineTo(fx.x2, fx.y2);
-            ctx.strokeStyle = fx.color;
-            ctx.lineWidth = 6;
-            ctx.stroke();
-        } else if (fx.type === "beam") {
-            ctx.beginPath();
-            ctx.moveTo(fx.x1, fx.y1);
-            ctx.lineTo(fx.x2, fx.y2);
-            ctx.strokeStyle = fx.color;
-            ctx.lineWidth = fx.width;
-            ctx.lineCap = "round";
-            ctx.stroke();
+            // 원형 영역: 현재 원의 반지름 안에 상대방이 들어왔는지 계산
+            const dist = Math.hypot(fx.target.x - fx.x, fx.target.y - fx.y);
+            if (dist <= fx.radius + fx.target.radius) {
+                isHit = true;
+            }
+        } else if (fx.type === "lightning" || fx.type === "beam") {
+            // 번개/레이저: 즉시 발사되므로 첫 프레임에 바로 타격 판정
+            isHit = true;
         }
 
-        ctx.restore();
-        fx.duration--;
-        if (fx.duration <= 0) visualEffects.splice(i, 1);
+        // 🎯 2. 타격 성공 시 데미지 적용
+        if (isHit) {
+            fx.target.currentHp = Math.max(0, fx.target.currentHp - fx.damage);
+            addDamageText(fx.target.x, fx.target.y - 30, `-${fx.damage}`, fx.caster ? fx.caster.color : "#ff3b30");
+            fx.hasHit = true; // 중복 타격 방지
+        }
     }
+
+    // 🎨 3. 이펙트 그래픽 그리기
+    if (fx.type === "explosion" || fx.type === "wave") {
+        ctx.beginPath();
+        ctx.arc(fx.x, fx.y, fx.radius, 0, Math.PI * 2);
+        ctx.fillStyle = fx.color;
+        ctx.fill();
+        // 원이 점점 커짐
+        fx.radius += (fx.maxRadius - fx.radius) * 0.15;
+    } else if (fx.type === "lightning") {
+        ctx.beginPath();
+        ctx.moveTo(fx.x1, fx.y1);
+        const midX = (fx.x1 + fx.x2) / 2 + (Math.random() - 0.5) * 40;
+        const midY = (fx.y1 + fx.y2) / 2 + (Math.random() - 0.5) * 40;
+        ctx.lineTo(midX, midY);
+        ctx.lineTo(fx.x2, fx.y2);
+        ctx.strokeStyle = fx.color;
+        ctx.lineWidth = 6;
+        ctx.stroke();
+    } else if (fx.type === "beam") {
+        ctx.beginPath();
+        ctx.moveTo(fx.x1, fx.y1);
+        ctx.lineTo(fx.x2, fx.y2);
+        ctx.strokeStyle = fx.color;
+        ctx.lineWidth = fx.width;
+        ctx.lineCap = "round";
+        ctx.stroke();
+    }
+
+    ctx.restore();
+    fx.duration--;
+    if (fx.duration <= 0) visualEffects.splice(i, 1);
+}
 
     [ballP1, ballP2].forEach(b => {
         ctx.save();
